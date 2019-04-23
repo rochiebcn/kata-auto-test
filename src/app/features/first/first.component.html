@@ -1,0 +1,87 @@
+<div class="example-container d-flex container-fluid">
+  <mat-toolbar color="primary">First practice</mat-toolbar>
+
+
+  <form class="example-form" (change)="emitChange()" [formGroup]="formGroup">
+    <div class="form-group container-fluid">
+      <div class="row mt-1 d-flex">
+        <mat-form-field class="example-full-width" >
+          <input matInput placeholder="Email" formControlName="emailFormControl" id="email"
+                 [errorStateMatcher]="matcher">
+          <mat-hint>Errors appear instantly!</mat-hint>
+          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+      </div>
+
+      <div class="row mt-1 d-flex">
+        <mat-form-field>
+          <input id="name" matInput formControlName="nameFormControl" placeholder="Input" >
+          <mat-error *ngIf="nameFormControl.invalid">Errrorrrrr</mat-error>
+        </mat-form-field>
+      </div>
+
+
+      <div class="row mt-1 d-flex">
+        <mat-form-field class="example-full-width">
+          <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of options" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+
+
+
+    </div>
+
+    <div class="row mt-1 d-flex">
+      <button mat-raised-button color="primary" [disabled]="!isOk" (click)="submit()">Basic</button>
+    </div>
+  </form>
+
+
+  <!--  <form class="w-100" [formGroup]="patientContactFormGroup">-->
+
+  <!--    &lt;!&ndash;  <ath-patient-contact-info [contactInfo]="patientContactFormGroup" [isPhoneMandatory]="true" [showLanguage]="true"></ath-patient-contact-info>&ndash;&gt;-->
+
+
+  <!--    &lt;!&ndash;    &lt;!&ndash; Example of validation with Reactive Form &ndash;&gt;&ndash;&gt;-->
+  <!--    &lt;!&ndash;    <label class="col-md-2 col-form-label" for="telephone2"> {{ 'ATT_ALTERNATIVE_PHONE' | translate | async }}</label>&ndash;&gt;-->
+  <!--    &lt;!&ndash;    <div class="col-md-2">&ndash;&gt;-->
+  <!--    &lt;!&ndash;      <input type="text" class="form-control" placeholder="{{ 'ATT_ALTERNATIVE_PHONE' | translate | async }}"&ndash;&gt;-->
+  <!--    &lt;!&ndash;             id="telephone2" formControlName="telephone2"&ndash;&gt;-->
+  <!--    &lt;!&ndash;             [class.slab-form_input&#45;&#45;error]="telephone2.invalid || telephone2.errors">&ndash;&gt;-->
+  <!--    &lt;!&ndash;    </div>&ndash;&gt;-->
+
+  <!--  </form>-->
+
+  <!--  <mat-form-field>-->
+  <!--    <input matInput placeholder="Enter your email" [formControl]="email" required>-->
+  <!--    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+  <!--  </mat-form-field>-->
+</div>
+
+
+<!--<div class="example-container">-->
+<!--  <mat-form-field>-->
+<!--    <input matInput placeholder="Input">-->
+<!--  </mat-form-field>-->
+
+<!--  <mat-form-field>-->
+<!--    <textarea matInput placeholder="Textarea"></textarea>-->
+<!--  </mat-form-field>-->
+
+<!--  <mat-form-field>-->
+<!--    <mat-select placeholder="Select">-->
+<!--      <mat-option value="option">Option</mat-option>-->
+<!--    </mat-select>-->
+<!--  </mat-form-field>-->
+<!--</div>-->

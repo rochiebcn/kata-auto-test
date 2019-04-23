@@ -37,6 +37,7 @@ describe('FirstComponent', () => {
     fixture = TestBed.createComponent(FirstComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    component.ngOnInit();
   });
 
   it('should create', () => {
@@ -44,8 +45,30 @@ describe('FirstComponent', () => {
   });
 
   it('should be disabled at init', () => {
-    const comp = new FirstComponent();
-    expect(comp.isOk).toBe(false, 'false at start');
+    // const comp = new FirstComponent();
+    expect(component.isOk).toBe(false, 'false at start');
     // expect(component.isOk).toBeFalsy();
+  });
+
+  it('form invalid at start', () => {
+    expect(component.formGroup.valid).toBeFalsy();
+  });
+
+  it('email field is invalid if is not filled', () => {
+    let emailFormControl = component.formGroup.controls.emailFormControl;
+    expect(emailFormControl.valid).toBeFalsy();
+    let errors = {};
+    errors = emailFormControl.errors || {};
+    expect(errors.required).toBeTruthy();
+  });
+
+  it('email field is invalid if has a text that is not an email', () => {
+    const emailValue = 'badEmail';
+    component.emailFormControl.setValue(emailValue);
+    const emailFormControl = component.formGroup.controls.emailFormControl;
+    let errors = {};
+    errors = emailFormControl.errors || {};
+    expect(emailFormControl.valid).toBeFalsy();
+    expect(errors.pattern).toBeTruthy();
   });
 });

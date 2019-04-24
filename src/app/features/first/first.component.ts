@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material';
 
@@ -7,6 +7,12 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
+
+export class User {
+  constructor(public email: string, public name: string, public option: string) {
+
   }
 }
 
@@ -19,19 +25,21 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class FirstComponent implements OnInit {
 
 
+  @Output() submitted = new EventEmitter<User>();
   public formGroup: FormGroup;
-  public nameFormControl = new FormControl('', [Validators.required, Validators.email]);
-  // public email = new FormControl('', [Validators.required, Validators.email]);
 
-  // @Output() isValidForm = new EventEmitter<boolean>();
-
+  nameFormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(3),
+    Validators.maxLength(8)]);
+  optionFormControl = new FormControl('', [
+    Validators.nullValidator]);
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
   ]);
 
   matcher = new MyErrorStateMatcher();
-  myControl =  new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
   public isOk: boolean;
 
@@ -43,7 +51,8 @@ export class FirstComponent implements OnInit {
   ngOnInit() {
     this.formGroup = new FormGroup({
       emailFormControl : this.emailFormControl,
-      nameFormControl : this.nameFormControl
+      nameFormControl : this.nameFormControl,
+      optionFormControl : this.optionFormControl
     });
     // this.formGroup.addControl();
     // this.formGroup.addControl();
@@ -60,6 +69,14 @@ export class FirstComponent implements OnInit {
   // }
 
   public submit() {
+    if (this.formGroup.valid) {
+      this.submitted.emit(
+        new User(
+          this.formGroup.value.emailFormControl,
+          this.formGroup.value.nameFormControl,
+          this.formGroup.value.optionFormControl)
+      );
+    }
 
   }
 

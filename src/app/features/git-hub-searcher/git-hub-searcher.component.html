@@ -1,0 +1,78 @@
+<div class="d-flex">
+  <mat-toolbar color="primary">GitHub searcher</mat-toolbar>
+  <p></p>
+  <div class="row mt-1">
+
+      <form>
+        <mat-form-field>
+          <mat-label>Type of search</mat-label>
+          <mat-select [(ngModel)]="what" name="what">
+            <mat-option *ngFor="let type of types" [value]="type">
+              {{type}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Parameter" [(ngModel)]="value" name="value">
+        </mat-form-field>
+      </form>
+
+    <div class="col-md-2">
+      <button mat-raised-button color="primary" (click)="performSearch()">Search</button> &nbsp;
+      <button mat-raised-button color="primary" (click)="getAllUsers()">Get Users</button> &nbsp;
+      <button mat-raised-button color="primary" (click)="reset()">Reset</button>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+  <p>
+
+  </p>
+
+    <mat-grid-list cols="4" *ngIf="searchResults">
+      <mat-grid-tile *ngFor="let result of searchResults.items">
+        <mat-card *ngIf="what === 'users'">
+          <mat-card-header><strong>{{result.login}}</strong></mat-card-header>
+          <mat-card-subtitle><strong>ID: </strong> {{result.id}}</mat-card-subtitle>
+          <mat-card-content>
+            <img src="{{result.avatar_url}}" width="150px" height="150px"/>
+            <br>
+            URL: <a href="{{result.html_url}}">GitHub URL</a>
+          </mat-card-content>
+        </mat-card>
+        <mat-card *ngIf="what === 'repositories'">
+          <mat-card-header><strong>{{result.name}}</strong></mat-card-header>
+          <mat-card-subtitle><strong>ID: </strong> {{result.id}}</mat-card-subtitle>
+          <mat-card-content>
+            <p>{{result.description}}</p>
+            <a href="{{result.html_url}}">{{result.html_url}}</a>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+
+    </mat-grid-list>
+
+
+  <mat-divider></mat-divider>
+  <p>
+
+  </p>
+    <mat-grid-list cols="4">
+      <mat-grid-tile *ngFor="let user of usersList">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{user.login}}</mat-card-title>
+            <mat-card-subtitle><strong>ID: </strong>{{user.id}}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              User: {{user.login}}<br>
+              URL: <a href="{{user.html_url}}">GitHub URL</a>
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+</div>

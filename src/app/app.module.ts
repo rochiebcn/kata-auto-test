@@ -5,15 +5,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormValidationComponent } from './features/form-validation/form-validation.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatAutocompleteModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatToolbarModule } from '@angular/material';
+import { MatAutocompleteModule, MatButtonModule, MatCardModule, MatDividerModule, MatFormFieldModule, MatGridListModule, MatInputModule, MatSelectModule, MatTabsModule, MatToolbarModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AgGridModule } from 'ag-grid-angular';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { GitHubSearcherComponent } from './features/git-hub-searcher/git-hub-searcher.component';
+import { GitHubApiService } from './services/git-hub-api.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FormValidationComponent
+    FormValidationComponent,
+    GitHubSearcherComponent
   ],
   imports: [
     BrowserModule,
@@ -28,9 +32,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FormsModule,
     AgGridModule.withComponents([]),
     MatButtonModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    HttpClientModule,
+    MatTabsModule,
+    MatCardModule,
+    MatGridListModule,
+    MatDividerModule
   ],
-  providers: [],
+  providers: [GitHubApiService, HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,8 +5,11 @@ import { FormValidationComponent } from './features/form-validation/form-validat
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatAutocompleteModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatToolbarModule } from '@angular/material';
+import { MatAutocompleteModule, MatButtonModule, MatCardModule, MatDividerModule, MatFormFieldModule, MatGridListModule, MatInputModule, MatSelectModule, MatTabsModule, MatToolbarModule } from '@angular/material';
 import { AgGridModule } from 'ag-grid-angular';
+import { GitHubApiService } from './services/git-hub-api.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { GitHubSearcherComponent } from './features/git-hub-searcher/git-hub-searcher.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -23,11 +26,18 @@ describe('AppComponent', () => {
         FormsModule,
         AgGridModule.withComponents([]),
         MatButtonModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        HttpClientModule,
+        MatTabsModule,
+        MatCardModule,
+        MatGridListModule,
+        MatDividerModule
       ],
+      providers: [GitHubApiService, HttpClient],
       declarations: [
         AppComponent,
-        FormValidationComponent
+        FormValidationComponent,
+        GitHubSearcherComponent
       ],
     }).compileComponents();
   }));

@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FirstComponent, User } from './first.component';
+import { FormValidationComponent, User } from './form-validation.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from '../../app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -9,13 +9,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatAutocompleteModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatToolbarModule } from '@angular/material';
 import { AgGridModule } from 'ag-grid-angular';
 
-describe('FirstComponent', () => {
-  let component: FirstComponent;
-  let fixture: ComponentFixture<FirstComponent>;
+describe('FormValidationComponent', () => {
+  let component: FormValidationComponent;
+  let fixture: ComponentFixture<FormValidationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FirstComponent ],
+      declarations: [ FormValidationComponent ],
       imports: [BrowserModule,
         AppRoutingModule,
         ReactiveFormsModule,
@@ -34,7 +34,7 @@ describe('FirstComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FirstComponent);
+    fixture = TestBed.createComponent(FormValidationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     component.ngOnInit();
@@ -45,9 +45,8 @@ describe('FirstComponent', () => {
   });
 
   it('should be disabled at init', () => {
-    // const comp = new FirstComponent();
+    // const comp = new FormValidationComponent();
     expect(component.isOk).toBe(false, 'false at start');
-    // expect(component.isOk).toBeFalsy();
   });
 
   it('form invalid at start', () => {

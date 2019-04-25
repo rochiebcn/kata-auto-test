@@ -1,7 +1,7 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { FirstComponent } from './features/first/first.component';
+import { FormValidationComponent } from './features/form-validation/form-validation.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -27,7 +27,7 @@ describe('AppComponent', () => {
       ],
       declarations: [
         AppComponent,
-        FirstComponent
+        FormValidationComponent
       ],
     }).compileComponents();
   }));

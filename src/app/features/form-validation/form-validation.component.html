@@ -1,0 +1,56 @@
+<div class="example-container d-flex container-fluid">
+  <mat-toolbar color="primary">Forms validation</mat-toolbar>
+
+
+  <form class="example-form" (change)="emitChange()" [formGroup]="formGroup">
+    <div class="form-group container-fluid">
+      <div class="row mt-1 d-flex">
+        <mat-form-field class="example-full-width" >
+          <input matInput placeholder="Email" formControlName="emailFormControl" id="email"
+                 [errorStateMatcher]="matcher">
+          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+      </div>
+
+      <div class="row mt-1 d-flex">
+        <mat-form-field>
+          <input id="name" matInput formControlName="nameFormControl" placeholder="Input"  [errorStateMatcher]="matcher">
+          <mat-error *ngIf="(nameFormControl.hasError('minlength') || nameFormControl.hasError('maxlength'))&& !nameFormControl.hasError('required')">
+            The name has to be a lenght between 3 and 8 characters
+          </mat-error>
+          <mat-error *ngIf="nameFormControl.hasError('required')">
+            Name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+
+      <div class="row mt-1 d-flex">
+        <mat-form-field class="example-full-width">
+          <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="optionFormControl" [matAutocomplete]="auto"  [errorStateMatcher]="matcher">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of options" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+
+
+
+    </div>
+
+    <div class="row mt-1 d-flex">
+      <button mat-raised-button color="primary" [disabled]="!isOk" (click)="submit()">Basic</button>
+    </div>
+  </form>
+
+
+
+</div>

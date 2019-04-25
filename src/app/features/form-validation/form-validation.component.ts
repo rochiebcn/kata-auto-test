@@ -17,12 +17,12 @@ export class User {
 }
 
 @Component({
-  selector: 'app-first',
-  templateUrl: './first.component.html',
-  styleUrls: ['./first.component.scss']
+  selector: 'app-form-validation',
+  templateUrl: './form-validation.component.html',
+  styleUrls: ['./form-validation.component.scss']
 })
 
-export class FirstComponent implements OnInit {
+export class FormValidationComponent implements OnInit {
 
 
   @Output() submitted = new EventEmitter<User>();
@@ -54,19 +54,8 @@ export class FirstComponent implements OnInit {
       nameFormControl : this.nameFormControl,
       optionFormControl : this.optionFormControl
     });
-    // this.formGroup.addControl();
-    // this.formGroup.addControl();
-
-    //
-    // this.patientContactFormGroup = new FormGroup(
-    //   nameFormControl);
   }
 
-  // getErrorMessage() {
-  //   return this.email.hasError('required') ? 'You must enter a value' :
-  //     this.email.hasError('email') ? 'Not a valid email' :
-  //       '';
-  // }
 
   public submit() {
     if (this.formGroup.valid) {

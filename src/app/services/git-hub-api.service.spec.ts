@@ -37,15 +37,12 @@ describe('GitHubApiService', () => {
         {login: 'Doe'}
       ];
       service.getUsers().subscribe(users => {
-        expect(users.length)
-          .toBe(2);
-        expect(users)
-          .toEqual(dummyUsers);
-      });
+        // TODO expects to check: we have 2 users & this users are the dummy users
+      }
+      );
 
-      const req = httpMock.expectOne(`${service.API_URL}/users`);
-      expect(req.request.method).toBe('GET');
-      req.flush(dummyUsers);
+      // TODO httpMock expectOne call
+      // TODO expect the method type to the API is GET
     });
   });
 
@@ -56,31 +53,22 @@ describe('GitHubApiService', () => {
       service.search('unknown', dummyParams).subscribe(
         () => {},
         err => {
-          expect(err).toBe(`Searching for unknown is not supported. The available types are: ${service.WHAT.join(', ')}.`);
+          // TODO expect the error that will be retrieve
         }
       );
 
-      httpMock.expectNone(`${service.API_URL}/search/users?q=rochiebcn`);
+      // TODO expect no calls to API has been made
     });
 
     it('should return an Observable<SearchResults>', () => {
       service.search('users', dummyParams).subscribe(
         result => {
-          expect(result.items[0]).toEqual({login: 'rochiebcn'});
-          expect(result.total_count).toBe(1);
+          // TODO expect the result of flush
         });
 
-      const req = httpMock.expectOne(`${service.API_URL}/search/users?q=rochiebcn`);
-      expect(req.request.url).toBe(`${service.API_URL}/search/users`);
-      expect(req.request.params).toEqual(dummyParams);
-
-      req.flush({
-        incomplete_results: false,
-        items: [{
-          login: 'rochiebcn'
-        }],
-        total_count: 1
-      });
+      // TODO expect one call to the API (URL with params)
+      // TODO expect request params are the dummy params
+      // TODO expect the request url are the API without params
     });
   });
 

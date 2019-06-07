@@ -28,3 +28,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Other info
 Release note generated with gren
+
+Steps:
+- create issue
+- solve issue
+  

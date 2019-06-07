@@ -32,4 +32,4 @@ Release note generated with gren
 Steps:
 - create issue
 - solve issue
-  
+- gren release 
